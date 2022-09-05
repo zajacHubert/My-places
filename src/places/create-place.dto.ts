@@ -1,6 +1,6 @@
 import { PlaceStatus } from "./place-status.enum";
 
-export class CreatePlace {
+export class CreatePlaceDto {
     name: string;
     description: string;
     status: PlaceStatus;
