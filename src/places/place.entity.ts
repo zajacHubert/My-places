@@ -3,7 +3,6 @@ import { PlaceStatus } from "./place-status.enum";
 
 @Entity()
 export class Place {
-
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -16,4 +15,9 @@ export class Place {
     @Column()
     status: PlaceStatus;
 
+    @Column()
+    lat: number;
+
+    @Column()
+    lon: number;
 }
