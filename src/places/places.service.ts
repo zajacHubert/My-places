@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePlaceDto } from './create-place.dto';
@@ -6,6 +6,7 @@ import { Place } from './place.entity';
 
 @Injectable()
 export class PlacesService {
+
     constructor(@InjectRepository(Place) private placesRepository: Repository<Place>) { }
 
     async getOne(id: string): Promise<Place> {
@@ -33,5 +34,12 @@ export class PlacesService {
             .select()
             .where("place.name LIKE :search", { search: `%${name}%` })
             .getMany();
+    }
+
+    async deletePlace(id: string): Promise<void> {
+        const result = await this.placesRepository.delete({ id });
+        if (result.affected === 0) {
+            throw new NotFoundException(`There is no such place`);
+        }
     }
 }
