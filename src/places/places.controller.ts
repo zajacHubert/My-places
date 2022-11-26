@@ -1,12 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreatePlaceDto } from './create-place.dto';
 import { PlacesService } from './places.service';
 
 @Controller('places')
 export class PlacesController {
-
-    constructor(private placesService: PlacesService) { }
-
+    constructor(
+        private placesService: PlacesService) { }
 
     @Get('/:id')
     getOne(@Param('id') id: string) {
@@ -32,5 +31,4 @@ export class PlacesController {
     deletePlace(@Param('id') id: string) {
         return this.placesService.deletePlace(id);
     }
-
 }
